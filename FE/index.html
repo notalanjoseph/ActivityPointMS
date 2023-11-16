@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students Login</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>    
+<body>
+    <div class="login-page">
+    <div class="form">
+        <form class="register-form" name="newForm">
+            <input type="text" placeholder="email address" name="username"/>
+            <input type="password" placeholder="password" name="password"/>
+            <!--<button name="crea">login</button>-->
+            <input type="button" value="Create" name ="crea">
+            <p class="message">Already registered? <a href="#">Sign In</a></p>
+        </form>
+        <form class="login-form" name="myForm">
+            <input type="text" placeholder="email id" name="username"/>    
+            <input type="password" placeholder="password" name="password"/>
+            <!--<button name="logi">login</button>-->
+            <input type="button" value="Login" name ="logi">
+            <p class="message">Not registered? <a href="#">Create an account</a></p>
+        </form>
+        <p id="error"></p>
+
+    </div>
+    </div>
+    <script src="route.js"></script>
+</body>    
+</html>
