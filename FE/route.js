@@ -97,12 +97,33 @@ function validateForm() {
             })
             */
     .then(console.log)  
-
 }
 
+function showActivites() {
+
+  // Make a fetch request to your FastAPI backend
+  fetch("http://localhost:8000/view", {
+    method: "GET",
+  })
+    .then((response) => {
+      if (!response.ok) {
+        document.getElementById("error").innerHTML = "ERROR";
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      //document.getElementById("error").innerHTML  = JSON.stringify(data, null, 2);
+      return response.json();
+    })
+    .then((data) => {
+      // Handle the data as needed
+      console.log(data.data); // Assuming the data has a "data" property
+      //displayData(data.data);
+      document.getElementById("error").innerHTML  = JSON.stringify(data.data, null, 2);
+    });
+}
 
 
 $(document).on('click', '.form [name="logi"]', validateForm);
 $(document).on('click', '.form [name="crea"]', regForm);
+$(document).on("click", '.form [name="sho"]', showActivites);
 
 //$('.form button').click(validateForm());

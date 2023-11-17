@@ -54,7 +54,7 @@ def root():
 def login(username: str = Form(...), password: str = Form(...)): #form input with names username and password are stored in vars with same name
 
 #    cursor.execute("""SELECT * FROM users WHERE email = %s""", (user_credentials.email,)) #comma to fix internal server error
-    cursor.execute("""SELECT * FROM users WHERE email = %s""", (username,)) #comma to fix internal server error
+    cursor.execute("""SELECT * FROM users WHERE email = %s and password = %s""", (username, password)) #comma to fix internal server error
     user = cursor.fetchone()
 
     if not user:
@@ -66,21 +66,26 @@ def login(username: str = Form(...), password: str = Form(...)): #form input wit
     return {"token_type": "bearer"}
 
 @app.post('/users')
-#def login(user_credentials: User):
-def login(username: str = Form(...), password: str = Form(...)): #form input with names username and password are stored in vars with same name
+#def register(user_credentials: User):
+def register(username: str = Form(...), password: str = Form(...)): #form input with names username and password are stored in vars with same name
 
     cursor.execute("""INSERT INTO users (email, password) VALUES (%s, %s) RETURNING *""", (username, password))
     new_user = cursor.fetchone()
     conn.commit()
     return {"data":new_user}
 
-@app.post("/uploads", status_code=status.HTTP_201_CREATED)
-def submit_activity(post: Post):
-    cursor.execute("""INSERT INTO actable (semester, category, title) VALUES (%s, %s, %s) RETURNING *""", (post.title, post.content, post.published))
+@app.post("/upload", status_code=status.HTTP_201_CREATED)
+def submit_activity(semester: str = Form(...), category: str = Form(...), title: str = Form(...), proof: str = Form(...)):
+    cursor.execute("""INSERT INTO actable (semester, category, title, proof) VALUES (%s, %s, %s, %s) RETURNING *""", (semester, category, title, proof))
     new_post = cursor.fetchone()
     conn.commit()
     return {"data":new_post}
 
+@app.get("/view")
+def get_activities():
+    cursor.execute("""SELECT semester, category, title, proof, points FROM actable ORDER BY semester DESC""")
+    acts = cursor.fetchall()
+    return {"data": acts} 
 
 
 
