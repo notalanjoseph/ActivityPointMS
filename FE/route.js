@@ -97,19 +97,10 @@ function validateForm() {
       .then(console.log)
 */
       .then((data) => {
-        console.log("User ID in data:", data.user_id);
-
         // Store the user_id in the variable
-        //loggedInUserId = data.user_id; //useless since this is lost after landing page pops up
-localStorage.setItem("user_id", data.user_id);
-const loggedInUserId = localStorage.getItem("user_id");
-console.log("User ID in dashboard:", loggedInUserId);
- // If needed, parse it back to an object
- const userObject = JSON.parse(loggedInUserId);
- console.log('Parsed User Object:', userObject);
-        // Access the user_id here
-        //console.log("My LOG:", loggedInUserId);
-//window.location.href = "landing.html";
+        var person = data.user_id;
+        localStorage.setItem("person", JSON.stringify(person));
+        window.location.href = "landing.html";
         // Use the data for future fetch requests or other actions
         //handleLoggedInUser(loggedInUserId);
       });
@@ -118,10 +109,15 @@ console.log("User ID in dashboard:", loggedInUserId);
 function showActivites() {
 
   // Retrieve user_id from localStorage
-        const loggedInUserId = localStorage.getItem('user_id');
-        console.log('User ID in dashboard:', loggedInUserId);
+  var personString = localStorage.getItem("person");
+  var person = JSON.parse(personString);
+  console.log(person.email);
+
+  const loggedInUser = JSON.parse(localStorage.getItem('person'));
+
+  console.log('User ID in localstog:', loggedInUser.email);
   const formData = new FormData();
-  formData.append("user_id", loggedInUserId);
+  formData.append("user_id", loggedInUser.email);
 
   // Make a fetch request to your FastAPI backend
   fetch("http://localhost:8000/view", {

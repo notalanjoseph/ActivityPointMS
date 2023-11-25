@@ -56,13 +56,8 @@ def login(username: str = Form(...), password: str = Form(...)): #form input wit
 #    cursor.execute("""SELECT * FROM users WHERE email = %s""", (user_credentials.email,)) #comma to fix internal server error
     cursor.execute("""SELECT email FROM users WHERE email = %s and password = %s""", (username, password)) #comma to fix internal server error
     user = cursor.fetchone()
-
     if not user:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Invalid Credentials")
-        
-    #create a token
-    #return  token
-
     return {"user_id": user}
 
 @app.post('/users')
