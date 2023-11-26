@@ -1,0 +1,67 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: system-ui;
+}
+
+h1{
+    font-variant: normal;  
+    font-weight: lighter;  
+    font-size: 50px;
+    color: rgb(198, 243, 233);
+}
+
+
+.background{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background-image: url(background.jpg);
+    /*use to make background darker linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75))*/
+    background-size: cover;
+    background-position: center;
+}
+
+
+.header{
+    display: flex;
+    width: 100%;
+    height: 12vh;
+    border-bottom-style: solid;
+    border-bottom-width: 1dp;
+    border-color: white;
+    /*background-color: red;*/
+}
+.header p{
+    font-variant: normal;  
+    font-weight: lighter;  
+    font-size: 50px;
+    color: rgb(198, 243, 233);
+}
+.part1{
+    width: 70%;
+    height: 60%;
+    margin-left: 15px;
+    padding: 15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+    /*background-color: aliceblue;*/
+}
+.logo{
+    width: 10vh;
+    cursor: pointer;
+}
+.part2{
+    width: 30%;
+    height: 60%;
+    margin-right: 15px;
+    padding: 15px 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    /*background-color: blueviolet;*/
+}
+
+
