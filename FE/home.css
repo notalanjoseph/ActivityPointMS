@@ -120,10 +120,12 @@ input{
 
 
 .section3 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: left;
 
   background-color: grey;
+}
+
+.section3 h2 {
+  margin-left: 1vw;
 }
 
