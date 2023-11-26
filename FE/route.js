@@ -1,25 +1,20 @@
-$('.message a').click(function(){
+// index page animation
+$('.message a').click(function() {
    removeAlerts();
    $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
 });
 
 
-
-//from another pen
-
-function removeAlerts(){
-  document.getElementById("error").innerHTML = "";
-  document.getElementById("error").innerHTML = "";
-  document.getElementById("error").innerHTML = "";
-  document.getElementById("error").innerHTML = "";
+function removeAlerts() {
+  document.getElementById("display").innerHTML = "";
+  document.getElementById("display").innerHTML = "";
+  document.getElementById("display").innerHTML = "";
+  document.getElementById("display").innerHTML = "";
 }
 
-
-//let loggedInUserId; // a variable to store the user_id
-
 function regForm() {
-  var username = document.forms["newForm"]["username"].value;
-  var pwd = document.forms["newForm"]["password"].value;
+  var username = document.forms["newForm"]["emailFE"].value;
+  var pwd = document.forms["newForm"]["passwordFE"].value;
   
   // Create a FormData object and append the credentials
   const formData = new FormData();
@@ -31,25 +26,25 @@ function regForm() {
     method: "POST",
     body: formData
   })
-    .then((response) => {
-      if (!response.ok) {
-        document.getElementById("error").innerHTML = "ERROR";
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+  then((response) => {
+    if (!response.ok) {
+      document.getElementById("display").innerHTML = "ERROR";
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
 
-      document.getElementById("error").innerHTML = "success";
-      window.location.href = "index.html";
-      return response.json();
-    })
-    .then(console.log);
+    document.getElementById("display").innerHTML = "success";
+    window.location.href = "index.html";
+    return response.json();
+  })
+  .then(console.log);
 }
 
 
 function validateForm() {
   //removeAlerts();
 
-    var username = document.forms["myForm"]["username"].value;
-    var pwd = document.forms["myForm"]["password"].value;
+  var username = document.forms["oldForm"]["emailFE"].value;
+  var pwd = document.forms["oldForm"]["passwordFE"].value;
 /*
     if(!username && !pwd){
         document.getElementById("error").innerHTML = "Please input username and password";
@@ -66,24 +61,23 @@ function validateForm() {
 	}
 */    
     // Create a FormData object and append the credentials
-    const formData = new FormData();
-    formData.append('username', username);
-    formData.append('password', pwd);
+  const formData = new FormData();
+  formData.append('username', username);
+  formData.append('password', pwd);
 
-    // Make a fetch request to your FastAPI backend
-    fetch("http://localhost:8000/login", {
-      method: "POST",
-      body: formData
-    })
-      .then((response) => {
-        if (!response.ok) {
-          document.getElementById("error").innerHTML = "ERROR";
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        document.getElementById("error").innerHTML = "success";
-        
-        return response.json();  //necessary for next then
-      })
+  // Make a fetch request to your FastAPI backend
+  fetch("http://localhost:8000/login", {
+    method: "POST",
+    body: formData
+  })
+  .then((response) => {
+    if (!response.ok) {
+      document.getElementById("display").innerHTML = "ERROR";
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    document.getElementById("display").innerHTML = "success";      
+    return response.json();  //necessary for next then
+  })
 
       /*
             .then(data => {
@@ -96,14 +90,14 @@ function validateForm() {
             
       .then(console.log)
 */
-      .then((data) => {
-        // Store the user_id in the variable
-        var person = data.user_id;
-        localStorage.setItem("person", JSON.stringify(person));
-        window.location.href = "landing.html";
-        // Use the data for future fetch requests or other actions
-        //handleLoggedInUser(loggedInUserId);
-      });
+  .then((data) => {
+    // Store the user_id in the variable
+    var person = data.user_id;
+    localStorage.setItem("person", JSON.stringify(person));
+    window.location.href = "home.html";
+    // Use the data for future fetch requests or other actions
+    //handleLoggedInUser(loggedInUserId);
+  });
 }
 
 function showActivites() {
@@ -124,25 +118,25 @@ function showActivites() {
     method: "POST",
     body: formData
   })
-    .then((response) => {
-      if (!response.ok) {
-        document.getElementById("error").innerHTML = "ERROR";
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      //document.getElementById("error").innerHTML  = JSON.stringify(data, null, 2);
-      return response.json();
-    })
-    .then((data) => {
-      // Handle the data as needed
-      console.log(data.data); // Assuming the data has a "data" property
-      //displayData(data.data);
-      document.getElementById("error").innerHTML = JSON.stringify(data.data, null, 2);
-    });
+  .then((response) => {
+    if (!response.ok) {
+      document.getElementById("display").innerHTML = "ERROR";
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    //document.getElementById("error").innerHTML  = JSON.stringify(data, null, 2);
+    return response.json();
+  })
+  .then((data) => {
+    // Handle the data as needed
+    console.log(data.data); // Assuming the data has a "data" property
+    //displayData(data.data);
+    document.getElementById("display").innerHTML = JSON.stringify(data.data, null, 2);
+  });
 }
 
 
-$(document).on('click', '.form [name="logi"]', validateForm);
-$(document).on('click', '.form [name="crea"]', regForm);
-$(document).on("click", '.form [name="sho"]', showActivites);
+$(document).on('click', '.form [name="loginbutton"]', validateForm);
+$(document).on('click', '.form [name="createbutton"]', regForm);
+$(document).on("click", '.section1 [name="bottom-button"]', showActivites);
 
 //$('.form button').click(validateForm());
