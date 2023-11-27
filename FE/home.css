@@ -19,6 +19,7 @@ html {
   border-bottom-style: solid;
   border-bottom-width: 1vh;
   border-color: black;
+  font-family: 'Big Shoulders Inline Text', cursive;
 
   display: grid;
   grid-template-rows: 1fr 1fr;
@@ -33,7 +34,9 @@ html {
   grid-column: 1 / 2;
 
   margin-left: 5vw;
-  font-size: 7vh;
+  font-size: 8vh;
+  font-weight: bolder;
+
 }
 
 .top-button {
