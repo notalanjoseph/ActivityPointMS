@@ -84,19 +84,18 @@ html {
 select {
   width: 70%;
   background: wheat;
-  background-image: -webkit-linear-gradient(top, wheat, wheat);
-  background-image: linear-gradient(to bottom, wheat, wheat);
   border-radius: 20px;
-  border-width: 2px;
+  border: 0;
 }
 input{
   width: 70%;
   background: wheat;
-  background-image: -webkit-linear-gradient(top, wheat, wheat);
-  background-image: linear-gradient(to bottom, wheat, wheat);
   border-radius: 20px;
+  border: 0;
 }
-
+input:hover {
+  background: burlywood;
+}
 .bottom-button, .top-button, .lastbutton {
   background: #3498db;
   background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
