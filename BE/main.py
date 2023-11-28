@@ -54,7 +54,7 @@ def root():
 def login(username: str = Form(...), password: str = Form(...)): #form input with names username and password are stored in vars with same name
 
 #    cursor.execute("""SELECT * FROM users WHERE email = %s""", (user_credentials.email,)) #comma to fix internal server error
-    cursor.execute("""SELECT email FROM users WHERE email = %s and password = %s""", (username, password)) #comma to fix internal server error
+    cursor.execute("""SELECT email, type FROM users WHERE email = %s and password = %s""", (username, password)) #comma to fix internal server error
     user = cursor.fetchone()
     if not user:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Invalid Credentials")
@@ -62,9 +62,9 @@ def login(username: str = Form(...), password: str = Form(...)): #form input wit
 
 @app.post('/users')
 #def register(user_credentials: User):
-def register(username: str = Form(...), password: str = Form(...)): #form input with names username and password are stored in vars with same name
+def register(username: str = Form(...), password: str = Form(...), type: str = Form(...)): #form input with names username and password are stored in vars with same name
 
-    cursor.execute("""INSERT INTO users (email, password) VALUES (%s, %s) RETURNING *""", (username, password))
+    cursor.execute("""INSERT INTO users (email, password, type) VALUES (%s, %s, %s) RETURNING *""", (username, password, type))
     new_user = cursor.fetchone()
     conn.commit()
     return {"data":new_user}

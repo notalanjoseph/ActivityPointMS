@@ -13,27 +13,28 @@ function removeAlerts() {
 }
 
 function regForm() {
-  var username = document.forms["newForm"]["emailFE"].value;
-  var pwd = document.forms["newForm"]["passwordFE"].value;
+  var u = document.forms["newForm"]["emailFE"].value;
+  var p = document.forms["newForm"]["passwordFE"].value;
+  var t = document.forms["newForm"]["typeFE"].value;
   
   // Create a FormData object and append the credentials
   const formData = new FormData();
-  formData.append("username", username);
-  formData.append("password", pwd);
+  formData.append("username", u);
+  formData.append("password", p);
+  formData.append("type", t);
 
   // Make a fetch request to your FastAPI backend
   fetch("http://localhost:8000/users", {
     method: "POST",
     body: formData
   })
-  then((response) => {
+  .then((response) => {
     if (!response.ok) {
       document.getElementById("display").innerHTML = "ERROR";
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    document.getElementById("display").innerHTML = "success";
-    window.location.href = "index.html";
+    document.getElementById("display").innerHTML = "created";
     return response.json();
   })
   .then(console.log);
@@ -43,8 +44,8 @@ function regForm() {
 function validateForm() {
   //removeAlerts();
 
-  var username = document.forms["oldForm"]["emailFE"].value;
-  var pwd = document.forms["oldForm"]["passwordFE"].value;
+  var u = document.forms["oldForm"]["emailFE"].value;
+  var p = document.forms["oldForm"]["passwordFE"].value;
 /*
     if(!username && !pwd){
         document.getElementById("error").innerHTML = "Please input username and password";
@@ -61,14 +62,16 @@ function validateForm() {
 	}
 */    
 
-if(username == "admin" && pwd == "123") {
-  $("form").animate({ height: "toggle", opacity: "toggle" }, "slow");
-  return true;
-}
-    // Create a FormData object and append the credentials
+  if(u == "admin" && p == "123") {
+    removeAlerts();
+    $("form").animate({ height: "toggle", opacity: "toggle" }, "slow");
+    return true;
+  }
+
+  // Create a FormData object and append the credentials
   const formData = new FormData();
-  formData.append('username', username);
-  formData.append('password', pwd);
+  formData.append('username', u);
+  formData.append('password', p);
 
   // Make a fetch request to your FastAPI backend
   fetch("http://localhost:8000/login", {
@@ -80,7 +83,7 @@ if(username == "admin" && pwd == "123") {
       document.getElementById("display").innerHTML = "ERROR";
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    document.getElementById("display").innerHTML = "success";      
+    //document.getElementById("display").innerHTML = "success";      
     return response.json();  //necessary for next then
   })
 
@@ -99,6 +102,16 @@ if(username == "admin" && pwd == "123") {
     // Store the user_id in the variable
     var person = data.user_id;
     localStorage.setItem("person", JSON.stringify(person));
+
+
+    //check if professor
+    if(person.type == 2)  {
+      document.getElementById("display").innerHTML = "teacher";
+      return true;
+    }
+
+
+
     window.location.href = "home.html";
     // Use the data for future fetch requests or other actions
     //handleLoggedInUser(loggedInUserId);
@@ -132,16 +145,29 @@ function showActivites() {
     return response.json();
   })
   .then((data) => {
-    // Handle the data as needed
-    console.log(data.data); // Assuming the data has a "data" property
-    //displayData(data.data);
-    document.getElementById("display").innerHTML = JSON.stringify(data.data, null, 2);
+    console.log(data.data); //data has a "data" property
+
+    // dynamically generate table rows
+    const tableBody = document.querySelector("#data-table tbody");
+    tableBody.innerHTML = "";
+    // Iterate over the data array and create rows
+    data.data.forEach((entry) => {
+      const row = document.createElement("tr");
+      // Create table cells and populate with data
+      for (const key in entry) {
+        const cell = document.createElement("td");
+        cell.textContent = entry[key];
+        row.appendChild(cell);
+      }
+      tableBody.appendChild(row);
+    });
   });
 }
 
 
 $(document).on('click', '.form [name="loginbutton"]', validateForm);
 $(document).on('click', '.form [name="createbutton"]', regForm);
+$(document).on("click", '.section1 [name="top-button"]', function() { window.location.replace("index.html"); });
 $(document).on("click", '.section1 [name="bottom-button"]', showActivites);
 
 //$('.form button').click(validateForm());
