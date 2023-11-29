@@ -82,6 +82,11 @@ def get_activities(user_id: str = Form(...)):
     acts = cursor.fetchall()
     return {"data": acts} 
 
+@app.post("/total")
+def get_total(user_id: str = Form(...)):
+    cursor.execute("""SELECT sum(points) FROM actable where user_id = (%s)""", (user_id, ))
+    tot = cursor.fetchone()
+    return {"data": tot} 
 
 
 
@@ -93,12 +98,6 @@ def get_activities(user_id: str = Form(...)):
 
 
 
-@app.post("/createpost")
-def create_post(payload: dict = Body(...)): #extracts all fields from the body, convert to dict and store in variable payload
-    print(payload)
-    return {"message":"success"}
-
-my_posts = [{"title":"title 1", "content":"content 1", "id":1},{"title":"title 2", "content":"content 2", "id":2}] 
 
 @app.get("/posts")
 def get_posts():

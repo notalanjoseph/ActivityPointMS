@@ -124,7 +124,7 @@ function showActivites() {
   const formData = new FormData();
   formData.append("user_id", loggedInUser.email);
 
-  // Make a fetch request to your FastAPI backend
+  // display all activities of student
   fetch("http://localhost:8000/view", {
     method: "POST",
     body: formData
@@ -164,6 +164,20 @@ function showActivites() {
       tableBody.appendChild(row);
     });
   });
+
+    // display total points of student
+  fetch("http://localhost:8000/total", {
+    method: "POST",
+    body: formData
+  })
+  .then((response) => {
+    return response.json();
+  })
+  .then((data) => {
+    //console.log(data.data.sum);
+    total.innerHTML = JSON.stringify(data.data.sum);
+  });
+
 }
 
 
