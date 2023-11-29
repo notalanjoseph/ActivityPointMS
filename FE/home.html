@@ -23,42 +23,45 @@
       </div>
 
       <div class="section2">
-        <select name="select1" id="select1">
-          <option value="" disabled selected hidden>Select Semester</option>
-          <option value="s1">Semester 1</option>
-          <option value="s2">Semester 2</option>
-          <option value="s3">Semester 3</option>
-          <option value="s4">Semester 4</option>
-          <option value="s5">Semester 5</option>
-          <option value="s6">Semester 6</option>
-          <option value="s7">Semester 7</option>
-          <option value="s8">Semester 8</option>
-        </select>
-        <select name="select2" id="select2">
-          <option value="" disabled selected hidden>Select Category</option>
-          <option value="option4">Tech Fest/Quiz</option>
-          <option value="option3">MOOC Course</option>
-          <option value="option4">Webinars/Conferences</option>
-          <option value="option3">NCC/NSS</option>
-          <option value="option4">Sports/Games</option>
-          <option value="option3">Music/Arts</option>
-          <option value="option4">Internship</option>
-          <option value="option3">Society/Club Execom</option>
-          <option value="option4">Startup</option>
-        </select>
-        <input
-          type="text"
-          placeholder="Enter Title"
-          name="input1"
-          id="input1"
-        />
-        <input
-          type="text"
-          placeholder="Enter Proof"
-          name="input2"
-          id="input2"
-        />
-        <input type="button" value="SUBMIT" class="lastbutton" name ="lastbutton">
+        <form class="uploadForm" name="uploadForm">
+          <select name="semFE" id="semFE">
+            <option value="" disabled selected hidden>Select Semester</option>
+            <option value="1">Semester 1</option>
+            <option value="2">Semester 2</option>
+            <option value="3">Semester 3</option>
+            <option value="4">Semester 4</option>
+            <option value="5">Semester 5</option>
+            <option value="6">Semester 6</option>
+            <option value="7">Semester 7</option>
+            <option value="8">Semester 8</option>
+          </select>
+          <select name="catFE" id="catFE">
+            <option value="" disabled selected hidden>Select Category</option>
+            <option value="Tech Fest/Quiz">Tech Fest/Quiz</option>
+            <option value="MOOC Course">MOOC Course</option>
+            <option value="Webinars/Conferences">Webinars/Conferences</option>
+            <option value="NCC/NSS">NCC/NSS</option>
+            <option value="Sports/Games">Sports/Games</option>
+            <option value="Music/Arts">Music/Arts</option>
+            <option value="Internship">Internship</option>
+            <option value="Society/Club Execom">Society/Club Execom</option>
+            <option value="Startup">Startup</option>
+          </select>
+          <input
+            type="text"
+            placeholder="Enter Title"
+            name="titleFE"
+            id="titleFE"
+          />
+          <input
+            type="text"
+            placeholder="Enter Proof"
+            name="proofFE"
+            id="proofFE"
+          />
+          <input type="button" value="SUBMIT" class="lastbutton" name ="lastbutton">
+        </form>
+        <p id="display"></p>
       </div>
 
       <div class="section3">

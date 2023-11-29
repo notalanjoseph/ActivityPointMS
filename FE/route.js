@@ -7,9 +7,6 @@ $('.message a').click(function() {
 
 function removeAlerts() {
   document.getElementById("display").innerHTML = "";
-  document.getElementById("display").innerHTML = "";
-  document.getElementById("display").innerHTML = "";
-  document.getElementById("display").innerHTML = "";
 }
 
 function regForm() {
@@ -121,13 +118,9 @@ function validateForm() {
 function showActivites() {
 
   // Retrieve user_id from localStorage
-  var personString = localStorage.getItem("person");
-  var person = JSON.parse(personString);
-  console.log(person.email);
-
   const loggedInUser = JSON.parse(localStorage.getItem('person'));
+  //console.log('User ID in localstog:', loggedInUser.email);
 
-  console.log('User ID in localstog:', loggedInUser.email);
   const formData = new FormData();
   formData.append("user_id", loggedInUser.email);
 
@@ -156,7 +149,16 @@ function showActivites() {
       // Create table cells and populate with data
       for (const key in entry) {
         const cell = document.createElement("td");
-        cell.textContent = entry[key];
+        // Check if the current key is "proof" to create a clickable link
+        if (key === "proof") {
+          const link = document.createElement('a');
+          link.href = entry[key];
+          link.textContent = "Link";
+          link.target = "_blank"; // Open link in a new tab/window
+          cell.appendChild(link);
+        } else {
+            cell.textContent = entry[key];
+        }
         row.appendChild(cell);
       }
       tableBody.appendChild(row);
@@ -165,9 +167,46 @@ function showActivites() {
 }
 
 
+function uploadActiviy() {
+  var loggedInUser = JSON.parse(localStorage.getItem("person"));
+  var s = document.forms["uploadForm"]["semFE"].value;
+  var c = document.forms["uploadForm"]["catFE"].value;
+  var t = document.forms["uploadForm"]["titleFE"].value;
+  var p = document.forms["uploadForm"]["proofFE"].value;
+  
+  // Create a FormData object and append the data
+  const formData = new FormData();
+  formData.append("user_id", loggedInUser.email);
+  formData.append("semester", s);
+  formData.append("category", c);
+  formData.append("title", t);
+  formData.append("proof", p);
+
+  // Make a fetch request to your FastAPI backend
+  fetch("http://localhost:8000/upload", {
+    method: "POST",
+    body: formData
+  })
+  .then((response) => {
+    if (!response.ok) {
+      document.getElementById("display").innerHTML = "ERROR";
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    document.getElementById("display").innerHTML = "submitted";
+    return response.json();
+  })
+  .then(console.log);
+}
+
+//total points
+
+//allot points
+
 $(document).on('click', '.form [name="loginbutton"]', validateForm);
 $(document).on('click', '.form [name="createbutton"]', regForm);
 $(document).on("click", '.section1 [name="top-button"]', function() { window.location.replace("index.html"); });
 $(document).on("click", '.section1 [name="bottom-button"]', showActivites);
+$(document).on("click", '.section2 [name="lastbutton"]', uploadActiviy);
 
 //$('.form button').click(validateForm());
