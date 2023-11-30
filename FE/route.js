@@ -109,9 +109,7 @@ function validateForm() {
 
 
 
-    window.location.href = "home.html";
-    // Use the data for future fetch requests or other actions
-    //handleLoggedInUser(loggedInUserId);
+    window.location.href = "student.html";
   });
 }
 

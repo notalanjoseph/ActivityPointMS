@@ -89,6 +89,12 @@ def get_total(user_id: str = Form(...)):
     return {"data": tot} 
 
 
+@app.post("/allot")
+def allot_points(post_id: str = Form(...), points: str = Form(...)):
+    cursor.execute("""UPDATE actable set points = (%s) WHERE id = (%s) RETURNING *""", (points, post_id))
+    updates = cursor.fetchone()
+    conn.commit()
+    return {"data": updates} 
 
 
 
@@ -99,11 +105,6 @@ def get_total(user_id: str = Form(...)):
 
 
 
-@app.get("/posts")
-def get_posts():
-    cursor.execute("""SELECT * FROM posts """)
-    posts = cursor.fetchall()
-    return {"data": posts} 
 
 @app.post("/posts", status_code=status.HTTP_201_CREATED)
 def create_posts(post: Post):

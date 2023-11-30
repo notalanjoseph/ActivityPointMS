@@ -88,6 +88,9 @@ html {
   align-items: center;
   padding-left: 15%;
 
+    background-image: url(bgm.png);
+  background-position: center;
+
 }
 
 select {
