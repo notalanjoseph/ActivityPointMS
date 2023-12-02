@@ -114,7 +114,13 @@ function validateForm() {
 }
 
 function showActivites() {
-
+  // clear inputs
+  document.getElementById("semFE").selectedIndex = 0;
+  document.getElementById("catFE").selectedIndex = 0;
+  document.getElementById("titleFE").value = "";
+  document.getElementById("proofFE").value = "";
+  document.getElementById("lastbutton").value = "SUBMIT";
+  
   // Retrieve user_id from localStorage
   const loggedInUser = JSON.parse(localStorage.getItem('person'));
   //console.log('User ID in localstog:', loggedInUser.email);
@@ -173,7 +179,11 @@ function showActivites() {
   })
   .then((data) => {
     //console.log(data.data.sum);
-    total.innerHTML = JSON.stringify(data.data.sum);
+    if(data.data.sum === null || data.data.sum === undefined) {
+      total.innerHTML = 0;
+    } else {
+      total.innerHTML = JSON.stringify(data.data.sum);
+    }
   });
 
 }
@@ -201,11 +211,11 @@ function uploadActiviy() {
   })
   .then((response) => {
     if (!response.ok) {
-      document.getElementById("display").innerHTML = "ERROR";
+      document.getElementById("lastbutton").value = "error";
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    document.getElementById("display").innerHTML = "submitted";
+    document.getElementById("lastbutton").value = "submitted";
     return response.json();
   })
   .then(console.log);

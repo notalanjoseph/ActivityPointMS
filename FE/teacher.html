@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Teacher</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="teacher.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Inline+Text:wght@900&family=Oswald:wght@300&family=Roboto+Mono&family=Sacramento&display=swap" rel="stylesheet">
+    <!--
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script type="module" src="script.js"></script>-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <div class="grid-container">
+
+      <div class="section1">
+        <h1>Greetings Professor. You can allot points here.</h1>
+
+      </div>
+
+
+      <div class="section2">
+        <h2>Student submissions: </h2>
+        <p id="display"></p>
+
+        <table id="data-table">
+          <thead>
+            <tr>
+              <th>Student</th>
+              <th>Category</th>
+              <th>Title</th>
+              <th>Proof</th>
+              <th>Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Table rows will be dynamically added here -->
+          </tbody>
+        </table>
+        
+      </div>
+
+      <div class="section3">
+        <input type="button" value="LOGOUT" class="top-button" name ="top-button">
+        <input type="button" value="REFRESH" class="bottom-button" name ="bottom-button">
+      </div>
+
+
+    </div>
+    <script src="route.js"></script>
+  </body>
+</html>
