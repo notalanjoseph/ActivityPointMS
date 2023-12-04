@@ -21,7 +21,7 @@ h1 {
 
 .super-form {
   width: 360px;
-  padding: 3% 0 0;
+  padding: 1% 0 0;
   margin: auto;
 }
 .form {
@@ -29,8 +29,7 @@ h1 {
   z-index: 1;
   background: #FFFFFF;
   max-width: 360px;
-  margin: 0 auto;
-  padding: 45px;
+  padding: 45px 45px 15px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
@@ -79,6 +78,12 @@ input[name="loginbutton"], input[name="createbutton"] {
 .form .newForm {
   display: none;
 }
+
+h3 {
+  margin-top: 0;
+}
+
+/*
 .container {
   position: relative;
   z-index: 1;
@@ -112,3 +117,4 @@ input[name="loginbutton"], input[name="createbutton"] {
 .container .info span .fa {
   color: #EF3B3A;
 }
+*/
