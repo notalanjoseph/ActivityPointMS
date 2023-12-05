@@ -180,9 +180,12 @@ function showActivites() {
   .then((data) => {
     //console.log(data.data.sum);
     if(data.data.sum === null || data.data.sum === undefined) {
-      total.innerHTML = 0;
+      progressText.innerHTML = 0;
+      document.getElementById('progressCircle').style.strokeDashoffset = '329.7';
     } else {
-      total.innerHTML = JSON.stringify(data.data.sum);
+      var t = JSON.stringify(data.data.sum);
+      progressText.innerHTML = t;
+      document.getElementById('progressCircle').style.strokeDashoffset = 3.297*(100-t);
     }
   });
 
