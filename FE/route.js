@@ -178,10 +178,9 @@ function showActivites() {
     return response.json();
   })
   .then((data) => {
-    //console.log(data.data.sum);
-    if(data.data.sum === null || data.data.sum === undefined) {
-      progressText.innerHTML = 0;
-      document.getElementById('progressCircle').style.strokeDashoffset = '329.7';
+    console.log("sum equals", data);
+    if(data.data === null || data.data === undefined || data.data.sum === null || data.data.sum === undefined) {
+      {}
     } else {
       var t = parseInt(JSON.stringify(data.data.sum));
       progressText.innerHTML = t;
