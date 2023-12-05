@@ -183,7 +183,7 @@ function showActivites() {
       progressText.innerHTML = 0;
       document.getElementById('progressCircle').style.strokeDashoffset = '329.7';
     } else {
-      var t = JSON.stringify(data.data.sum);
+      var t = parseInt(JSON.stringify(data.data.sum));
       progressText.innerHTML = t;
       document.getElementById('progressCircle').style.strokeDashoffset = 3.297*(100-t);
     }
