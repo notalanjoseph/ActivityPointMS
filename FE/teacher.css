@@ -35,3 +35,18 @@ html {
 }
 
 
+.section2 {
+  border-right-style: solid;
+  border-right-width: 1vh;
+  border-color: black;
+
+  
+}
+
+
+
+.section3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
