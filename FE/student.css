@@ -75,8 +75,9 @@ h1 {
   border-color: black;
   align-items: center;
   padding-left: 20%;
+  padding-top: 5%;
     background-image: url(bgm.png);
-  background-position: center;
+  background-size: contain;
 
 }
 .section2 select,
@@ -120,11 +121,15 @@ h2 {
   background: wheat;
   margin-left: 10%;
   min-width: 50vw;
-
+  border-radius: 20px;
 }
 #data-table td {
   text-align: center;
   vertical-align: middle;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-color: skyblue;
+
 }
 
 /* table styling given below. https://codepen.io/geoffyuen/pen/DZxEKy

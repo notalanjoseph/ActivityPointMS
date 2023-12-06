@@ -9,7 +9,7 @@ body {
   -moz-osx-font-smoothing: grayscale;      
 
   background-image: url(bgm.png);
-  background-position: center;
+  background-size: contain;
 }
 
 h1 {

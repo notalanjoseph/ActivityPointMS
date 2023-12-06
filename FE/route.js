@@ -167,27 +167,26 @@ function showActivites() {
       }
       tableBody.appendChild(row);
     });
-  });
 
     // display total points of student
-  fetch("http://localhost:8000/total", {
-    method: "POST",
-    body: formData
-  })
-  .then((response) => {
-    return response.json();
-  })
-  .then((data) => {
-    console.log("sum equals", data);
-    if(data.data === null || data.data === undefined || data.data.sum === null || data.data.sum === undefined) {
-      {}
-    } else {
-      var t = parseInt(JSON.stringify(data.data.sum));
-      progressText.innerHTML = t;
-      document.getElementById('progressCircle').style.strokeDashoffset = 3.297*(100-t);
-    }
+    fetch("http://localhost:8000/total", {
+      method: "POST",
+      body: formData
+    })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log("sum equals", data);
+      if(data.data === null || data.data === undefined || data.data.sum === null || data.data.sum === undefined) {
+        {}
+      } else {
+        var t = parseInt(JSON.stringify(data.data.sum));
+        progressText.innerHTML = t;
+        document.getElementById('progressCircle').style.strokeDashoffset = 3.297*(100-t);
+      }
+    });
   });
-
 }
 
 
