@@ -89,13 +89,24 @@ def get_total(user_id: str = Form(...)):
     return {"data": tot} 
 
 
-@app.post("/allot")
+@app.post("/teacher/allot")
 def allot_points(post_id: str = Form(...), points: str = Form(...)):
     cursor.execute("""UPDATE actable set points = (%s) WHERE id = (%s) RETURNING *""", (points, post_id))
     updates = cursor.fetchone()
     conn.commit()
     return {"data": updates} 
 
+@app.get("/teacher/viewold")
+def get_old():
+    cursor.execute("""SELECT user_id,SUM(points) FROM actable GROUP BY user_id""")
+    rows = cursor.fetchall()
+    return {"data": rows} 
+
+@app.get("/teacher/viewnew")
+def get_new():
+    cursor.execute("""SELECT id,user_id,category,title,proof FROM actable WHERE points is NULL ORDER BY user_id""")
+    rows = cursor.fetchall()
+    return {"data": rows} 
 
 
 
@@ -103,24 +114,6 @@ def allot_points(post_id: str = Form(...), points: str = Form(...)):
 
 
 
-
-
-
-@app.post("/posts", status_code=status.HTTP_201_CREATED)
-def create_posts(post: Post):
-    cursor.execute("""INSERT INTO posts (title, content, published) VALUES (%s, %s, %s) RETURNING *""", (post.title, post.content, post.published))
-    new_post = cursor.fetchone()
-    conn.commit()
-    return {"data":new_post}
-
-@app.get("/posts/{id}")
-def get_post(id: int):
-    cursor.execute("""SELECT * FROM posts WHERE id = %s""", (str(id)))
-    post = cursor.fetchone()
-    if not post: #if post == null
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail="post with that id not found")
-    return {"post": post}
 
 @app.delete("/posts/{id}", status_code=status.HTTP_204_NO_CONTENT) 
 def delete_post(id: int):
