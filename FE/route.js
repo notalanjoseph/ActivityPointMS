@@ -135,7 +135,7 @@ function showActivites() {
   })
   .then((response) => {
     if (!response.ok) {
-      document.getElementById("display").innerHTML = "ERROR";
+      //document.getElementById("display").innerHTML = "ERROR";
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     //document.getElementById("error").innerHTML  = JSON.stringify(data, null, 2);
@@ -222,9 +222,6 @@ function uploadActiviy() {
   .then(console.log);
 }
 
-//total points
-
-//allot points
 
 $(document).on('click', '.form [name="loginbutton"]', validateForm);
 $(document).on('click', '.form [name="createbutton"]', regForm);

@@ -17,15 +17,16 @@
 
       <div class="section1">
         <h1>Greetings Professor. You can allot points here.</h1>
+        <input type="button" value="REFRESH" id="refresh-button">
+        <input type="button" value="LOGOUT" id="logout-button">
 
       </div>
 
 
       <div class="section2">
         <h2>Student submissions: </h2>
-        <p id="display"></p>
 
-        <table id="data-table">
+        <table id="submissions-table">
           <thead>
             <tr>
               <th>Student</th>
@@ -43,12 +44,24 @@
       </div>
 
       <div class="section3">
-        <input type="button" value="LOGOUT" class="top-button" name ="top-button">
-        <input type="button" value="REFRESH" class="bottom-button" name ="bottom-button">
+        <h2>Student list: </h2>
+
+        <table id="points-table">
+          <thead>
+            <tr>
+              <th>Student</th>
+              <th>Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Table rows will be dynamically added here -->
+          </tbody>
+        </table>
+
       </div>
 
 
     </div>
-    <script src="route.js"></script>
+    <script src="teacher.js"></script>
   </body>
 </html>
