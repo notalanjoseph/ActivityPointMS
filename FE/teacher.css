@@ -82,7 +82,9 @@ h1 {
   border-color: skyblue;
 
 }
-
+.section2 input {
+  max-width: 50px;
+}
 
 
 .section3 {

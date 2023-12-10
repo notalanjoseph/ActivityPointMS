@@ -34,6 +34,23 @@ function refreshSubmissionsTable() {
             row.appendChild(cell);
         }
       }
+
+      // Add a button to each row
+      const inputCell = document.createElement('td');
+      const input = document.createElement('input');
+      input.type = 'number';
+      //input.value = entry[key];
+      inputCell.appendChild(input);
+      row.appendChild(inputCell);
+
+      // Add a button to each row
+      const buttonCell = document.createElement('td');
+      const button = document.createElement('button');
+      button.textContent = 'submit';
+      button.addEventListener('click', () => uploadPoint(entry.id, row));
+      buttonCell.appendChild(button);
+      row.appendChild(buttonCell);
+
       tableBody.appendChild(row);
     });
   });
@@ -69,11 +86,41 @@ function refreshPointsTable() {
 }
 
 
-//$(document).on("click", '[id="refresh-button"]', refreshPointsTable);
-//$(document).on("click", '[id="refresh-button"]', refreshSubmissionsTable);
 
 
-$(document).on("click", '[id="refresh-button"]', function() {
-  //refreshPointsTable();
-  refreshSubmissionsTable();
+// Function to upload points, edit using latest reply from chatgpt!
+function uploadPoint(id, row) {
+  // Get the input element within the row
+  const inputElement = row.querySelector('input');
+
+  // Extract the points entered by the user
+  const points = inputElement.value;
+
+  const formData = new FormData();
+  formData.append("post_id", id);
+  formData.append("points", points);
+
+
+  fetch("http://localhost:8000/teacher/allot", {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Handle the response if needed
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+
+$(document).ready(function() {
+  $('[id="refresh-button"]').on("click", function() {
+    refreshPointsTable();
+    setTimeout(function() {
+      refreshSubmissionsTable();
+    }, 1000);
+  });
 });
