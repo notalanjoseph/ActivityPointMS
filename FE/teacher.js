@@ -1,5 +1,4 @@
 function refreshSubmissionsTable() {
-  // display points of student
   fetch("http://localhost:8000/teacher/viewnew", {
     method: "GET",
   })
@@ -19,7 +18,8 @@ function refreshSubmissionsTable() {
       for (const key in entry) {
         const cell = document.createElement("td");
         if (key === "id") {
-            {}
+            // Add the id as a data attribute to the row
+            row.dataset.id = entry.id;
         } else if (key === "proof") {
             const link = document.createElement('a');
             link.href = entry[key];
@@ -32,7 +32,7 @@ function refreshSubmissionsTable() {
             row.appendChild(cell);
         }
       }
-      // Add a button to each row
+      // Add a textbox to each row
       const inputCell = document.createElement('td');
       const input = document.createElement('input');
       input.type = 'number';
@@ -44,7 +44,7 @@ function refreshSubmissionsTable() {
       const buttonCell = document.createElement('td');
       const button = document.createElement('button');
       button.textContent = 'submit';
-      button.addEventListener('click', () => uploadPoint(entry.id, row));
+      button.addEventListener('click', () => uploadPoint(row));
       buttonCell.appendChild(button);
       row.appendChild(buttonCell);
 
@@ -82,28 +82,34 @@ function refreshPointsTable() {
 }
 
 
-
-
-// Function to upload points, edit using latest reply from chatgpt!
-function uploadPoint(id, row) {
-  // Get the input element within the row
-  const inputElement = row.querySelector('input');
+function uploadPoint(row) {
 
   // Extract the points entered by the user
+  const inputElement = row.querySelector('input');
   const points = inputElement.value;
+
+  // Extract the id from the data attribute
+  const id = row.dataset.id;
 
   const formData = new FormData();
   formData.append("post_id", id);
   formData.append("points", points);
 
-
   fetch("http://localhost:8000/teacher/allot", {
         method: 'POST',
         body: formData
     })
-    .then(response => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        const buttonCell = row.querySelector('td button');
+        buttonCell.style.backgroundColor = 'red';
+        console.log(data);
+      }
+      return response.json();
+    })
     .then(data => {
-        // Handle the response if needed
+        const buttonCell = row.querySelector('td button');
+        buttonCell.style.backgroundColor = 'green';
         console.log(data);
     })
     .catch(error => {
