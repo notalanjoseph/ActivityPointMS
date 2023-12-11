@@ -18,7 +18,6 @@ function refreshSubmissionsTable() {
       const row = document.createElement("tr");
       for (const key in entry) {
         const cell = document.createElement("td");
-
         if (key === "id") {
             {}
         } else if (key === "proof") {
@@ -28,13 +27,11 @@ function refreshSubmissionsTable() {
             link.target = "_blank"; // Open link in a new tab/window
             cell.appendChild(link);
             row.appendChild(cell);
-
         } else {
             cell.textContent = entry[key];
             row.appendChild(cell);
         }
       }
-
       // Add a button to each row
       const inputCell = document.createElement('td');
       const input = document.createElement('input');
@@ -58,7 +55,6 @@ function refreshSubmissionsTable() {
 
 
 function refreshPointsTable() {
-  // display points of student
   fetch("http://localhost:8000/teacher/viewold", {
     method: "GET",
   })
@@ -121,6 +117,8 @@ $(document).ready(function() {
     refreshPointsTable();
     setTimeout(function() {
       refreshSubmissionsTable();
-    }, 1000);
+    }, 500);
   });
 });
+
+$(document).on("click", '[id="logout-button"]', function() { window.location.replace("index.html"); });
