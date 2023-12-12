@@ -28,13 +28,12 @@ html {
   align-items: center;
 }
 
-h1 {
+img {
   grid-row: 1 / 3;
   grid-column: 1 / 2;
 
-  margin-left: 5vw;
-  font-size: 6vh;
-  font-weight: bolder;
+  padding-left: 5%;
+  width: 110%;
 }
 .section1 input {
   border: 0;
@@ -104,4 +103,3 @@ h1 {
   border-color: skyblue;
 
 }
-
