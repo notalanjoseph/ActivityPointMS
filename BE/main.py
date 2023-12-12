@@ -108,37 +108,6 @@ def get_new():
     rows = cursor.fetchall()
     return {"data": rows} 
 
-
-
-
-
-
-
-
-@app.delete("/posts/{id}", status_code=status.HTTP_204_NO_CONTENT) 
-def delete_post(id: int):
-    cursor.execute("""DELETE FROM posts WHERE id = %s RETURNING *""", (str(id)))
-    deleted_post = cursor.fetchone()
-    conn.commit()
-
-    if not deleted_post:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail="post with that id not found")
-
-    return Response(status_code=status.HTTP_204_NO_CONTENT)
-
-@app.put("/posts/{id}")
-def update_post(id: int, post: Post):
-    cursor.execute("""UPDATE posts SET title = %s, content = %s, published = %s WHERE id = %s RETURNING *""", (post.title, post.content, post.published, str(id)))
-    updated_post = cursor.fetchone()
-    conn.commit()
-
-    if not updated_post:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail="post with that id not found")
-
-    return {"data": updated_post}
-
 # url/docs or url/redoc for viewing auto created documentation
 
 # now we will use db.
