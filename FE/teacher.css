@@ -5,12 +5,16 @@ html {
   background: whitesmoke;
   font-family: Roboto Mono, monospace;
 }
-
 .grid-container {
   display: grid;
   grid-template-rows: 20% 1fr;
   grid-template-columns: 2fr 1fr;
   height: 100vh;
+}
+h2 {
+  background-color: whitesmoke;
+  display: inline-block;
+  border-radius: 20px;
 }
 
 .section1 {
@@ -68,12 +72,14 @@ img {
   border-right-width: 1vh;
   border-color: black;
   align-items: center;
+  padding-left: 2%;
 
-  
+  background-image: url(tsec2.png);
+  background-size: contain;
 }
 #submissions-table {
   background: wheat;
-  margin-left: 10%;
+  margin-left: 5%;
   min-width: 50vw;
   border-radius: 20px;
 }
@@ -92,6 +98,8 @@ img {
 
 .section3 {
   padding-left: 5%;
+  background-image: url(tsec3.png);
+  background-size: contain;
 }
 #points-table {
   background: wheat;
