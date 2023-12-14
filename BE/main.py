@@ -23,16 +23,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-class Post(BaseModel):
-    title: str
-    content: str
-    published: bool=True
-
-class User(BaseModel):
-    email: str
-    password: str
-        
-
 # db connection
 while True:
     try:
@@ -44,10 +34,6 @@ while True:
         print("DB connection failed:\n ", e)
         time.sleep(10)
 
-@app.get("/")
-def root():
-    return {"message":"hello wor"}
-
 
 @app.post('/login')
 #def login(user_credentials: User):
@@ -58,7 +44,7 @@ def login(username: str = Form(...), password: str = Form(...)): #form input wit
     user = cursor.fetchone()
     if not user:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Invalid Credentials")
-    return {"user_id": user}
+    return {"creds": user}
 
 @app.post('/users')
 #def register(user_credentials: User):
@@ -109,6 +95,3 @@ def get_new():
     return {"data": rows} 
 
 # url/docs or url/redoc for viewing auto created documentation
-
-# now we will use db.
-# dirctory structure will be used with parent folder 'app'

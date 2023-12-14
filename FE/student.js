@@ -8,10 +8,10 @@ function refreshPage() {
   
   // Retrieve user_id from localStorage
   const loggedInUser = JSON.parse(localStorage.getItem('person'));
-  //console.log('User ID in localstog:', loggedInUser.email);
+  //console.log('User ID in localstog:', loggedInUser);
 
   const formData = new FormData();
-  formData.append("user_id", loggedInUser.email);
+  formData.append("user_id", loggedInUser);
 
   // display all activities of student
   fetch("http://localhost:8000/view", {
@@ -82,7 +82,7 @@ function uploadActiviy() {
   
   // Create a FormData object and append the data
   const formData = new FormData();
-  formData.append("user_id", loggedInUser.email);
+  formData.append("user_id", loggedInUser);
   formData.append("semester", s);
   formData.append("category", c);
   formData.append("title", t);

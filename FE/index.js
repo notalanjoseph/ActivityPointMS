@@ -61,22 +61,22 @@ function validateForm() {
   .then((response) => {
     if (!response.ok) {
       document.getElementById("display").innerHTML = "ERROR";
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      //throw new Error(`HTTP error! Status: ${response.status}`);
     }
     return response.json();  //necessary for next then
   })
   .then((data) => {
-    // Store the user_id in local storage
-    var person = data.user_id;
-    localStorage.setItem("person", JSON.stringify(person));
 
     //check if professor
-    if (person.type == 2)  {
+    if (data.creds.type == 2)  { 
       window.location.href = "teacher.html";
       return true;
     }
 
     //else student
+    var person = data.creds.email;
+    //console.log(data.creds.email)
+    localStorage.setItem("person", JSON.stringify(person)); // Store the user_id in local storage
     window.location.href = "student.html";
   });
 }
